@@ -1,6 +1,7 @@
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { database } from "./firebaseConfig";
 import toggleCompletion from "./toggleCompletion";
+import { openDeleteModal } from "./modal";
 
 const renderTasks = async (tasks = "all") => {
   const tableBody = document.querySelector(".table__body");
@@ -62,8 +63,13 @@ const renderTasks = async (tasks = "all") => {
     editTaskButton.innerHTML = "<i class='fa-solid fa-pen-to-square'>";
 
     //Adding classes
-    task.isCompleted && tableRow.classList.add("task--completed");
+    //task.isCompleted && tableRow.classList.add("task--completed");
     tableRow.classList.add("table__body-row");
+
+    if (task.isCompleted) {
+      tableRow.classList.add("task--completed");
+    }
+
     taskNumber.classList.add("table__body-number");
     taskTitle.classList.add("table__body-title");
     taskDate.classList.add("table__body-date");
@@ -79,10 +85,11 @@ const renderTasks = async (tasks = "all") => {
 
     //adding event listeners
     crossTaskButton.addEventListener("click", () => {
-      toggleCompletion(doc.id, task.isCompleted);
-      //   console.log(task);
+      toggleCompletion(doc.id, tableRow);
+    });
 
-      tableRow.classList.toggle("task--completed");
+    deleteTaskButton.addEventListener("click", () => {
+      openDeleteModal(doc.id, task.title);
     });
   });
 };

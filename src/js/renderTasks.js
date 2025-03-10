@@ -1,7 +1,8 @@
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { database } from "./firebaseConfig";
 import toggleCompletion from "./toggleCompletion";
-import { openDeleteModal } from "./modal";
+import { openDeleteModal, openEditModal } from "./modal";
+import { populateEditForm } from "./editTasks";
 
 const renderTasks = async (tasks = "all") => {
   const tableBody = document.querySelector(".table__body");
@@ -102,6 +103,11 @@ const renderTasks = async (tasks = "all") => {
 
     deleteTaskButton.addEventListener("click", () => {
       openDeleteModal(doc.id, task.title);
+    });
+
+    editTaskButton.addEventListener("click", () => {
+      openEditModal();
+      populateEditForm(doc.id);
     });
   });
 };

@@ -1,4 +1,6 @@
 import addTasks from "./addTasks";
+import appState from "./appState";
+import { editTask } from "./editTasks";
 import app, { database } from "./firebaseConfig";
 import { openModal, closeModal, closeDeleteModal } from "./modal";
 import renderTasks from "./renderTasks";
@@ -14,8 +16,8 @@ const timeInput = document.querySelector(".form__time-input");
 const categorySelect = document.querySelector(".form__category-select");
 const prioritySelect = document.querySelector(".form__priority-select");
 const openChartButton = document.querySelector(".tools__button--chart");
-const filterSelect = document.querySelector(".tools__filter--month");
-const submitButton = document.querySelector(".form__submission-feedback");
+const filterSelect = document.querySelector(".tools__filter-month");
+const submitButton = document.querySelector(".form__submit-button");
 const formSubmissionFeedback = document.querySelector(
   ".form__submission-feedback"
 );
@@ -29,12 +31,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  addTasks(
-    titleInput.value,
-    dateInput.value,
-    timeInput.value,
-    categorySelect.value,
-    prioritySelect.value
-  );
+  if (!appState.editState) {
+    addTasks(
+      titleInput.value,
+      dateInput.value,
+      timeInput.value,
+      categorySelect.value,
+      prioritySelect.value
+    );
+  } else {
+    editTask(appState);
+    appState.editState = null;
+  }
   renderTasks();
 });

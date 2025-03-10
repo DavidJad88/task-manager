@@ -1,6 +1,7 @@
 import appState from "./appState.js";
 import { database } from "./firebaseConfig";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { hideSpinner, showSpinner } from "./spinner.js";
 
 const formModal = document.querySelector(".form-modal");
 
@@ -29,6 +30,7 @@ const populateEditForm = async (id) => {
 };
 
 const editTask = async (id) => {
+  showSpinner();
   try {
     const editedTask = {
       title: titleInput.value,
@@ -44,6 +46,8 @@ const editTask = async (id) => {
     console.log("Document edited successfully!");
   } catch (error) {
     console.log("Error editing document: ");
+  } finally {
+    hideSpinner();
   }
 };
 

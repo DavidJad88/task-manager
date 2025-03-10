@@ -1,8 +1,10 @@
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { database } from "./firebaseConfig";
 import renderTasks from "./renderTasks";
+import { hideSpinner, showSpinner } from "./spinner";
 
 const filterTasksByMonth = async (selectedMonth) => {
+  showSpinner();
   try {
     const tasksCollection = collection(database, "tasks");
     const q = query(tasksCollection, orderBy("createdAt"));
@@ -19,6 +21,8 @@ const filterTasksByMonth = async (selectedMonth) => {
     renderTasks(filteredTasks);
   } catch (error) {
     console.log("Error filtering tasks: ");
+  } finally {
+    hideSpinner();
   }
 };
 

@@ -40,7 +40,7 @@ form.addEventListener("submit", (e) => {
       "Please fill in all the fields before adding a task";
     setTimeout(() => {
       formSubmissionFeedback.textContent = "";
-    }, 3000);
+    }, 2000);
     return;
   }
   if (!appState.editState) {
@@ -62,7 +62,7 @@ form.addEventListener("submit", (e) => {
   formSubmissionFeedback.textContent = "Task added successfully";
   setTimeout(() => {
     formSubmissionFeedback.textContent = "";
-  }, 3000);
+  }, 2000);
 });
 
 filterSelect.addEventListener("change", (e) => {

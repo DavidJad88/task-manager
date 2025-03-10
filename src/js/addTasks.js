@@ -1,7 +1,9 @@
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { database } from "./firebaseConfig";
+import { hideSpinner, showSpinner } from "./spinner";
 
 const addTasks = async (title, date, time, category, priority) => {
+  showSpinner();
   try {
     const task = {
       title,
@@ -18,6 +20,8 @@ const addTasks = async (title, date, time, category, priority) => {
     console.log("task added to firestore db successfully");
   } catch (error) {
     console.log("failed to add to firestore db");
+  } finally {
+    hideSpinner();
   }
 };
 

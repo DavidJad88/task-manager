@@ -9,11 +9,11 @@ const renderTasks = async (tasks = "all") => {
   tableBody.innerHTML = "";
   let renderCollection;
 
-  if ((tasks = "all")) {
+  if (tasks === "all") {
     const taskCollection = collection(database, "tasks");
     const q = query(taskCollection, orderBy("createdAt"));
-    const tasksSnapshop = await getDocs(q);
-    renderCollection = tasksSnapshop.docs;
+    const tasksSnapshot = await getDocs(q);
+    renderCollection = tasksSnapshot.docs;
   } else {
     renderCollection = tasks;
   }
@@ -32,6 +32,7 @@ const renderTasks = async (tasks = "all") => {
 
   renderCollection.forEach((doc, index) => {
     const task = doc.data();
+
     //Creating elements
     const tableRow = document.createElement("tr");
     const taskNumber = document.createElement("td");

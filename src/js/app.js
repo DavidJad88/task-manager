@@ -1,6 +1,7 @@
 import addTasks from "./addTasks";
 import appState from "./appState";
 import { editTask } from "./editTasks";
+import filterTasksByMonth from "./filterTasks";
 import app, { database } from "./firebaseConfig";
 import { openModal, closeModal, closeDeleteModal } from "./modal";
 import renderTasks from "./renderTasks";
@@ -44,4 +45,9 @@ form.addEventListener("submit", (e) => {
     appState.editState = null;
   }
   renderTasks();
+});
+
+filterSelect.addEventListener("change", (e) => {
+  const selectedMonth = e.target.value;
+  filterTasksByMonth(selectedMonth);
 });

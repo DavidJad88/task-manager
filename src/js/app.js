@@ -35,12 +35,12 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
   formSubmissionFeedback.classList.remove("form--invalid-input", "form--valid");
   if (!validateForm()) {
-    formSubmissionFeedback.classList.add("form--invalid-input");
-    formSubmissionFeedback.textContent =
-      "Please fill in all the fields before adding a task";
-    setTimeout(() => {
-      formSubmissionFeedback.textContent = "";
-    }, 2000);
+    // formSubmissionFeedback.classList.add("form--invalid-input");
+    // formSubmissionFeedback.textContent =
+    //   "Please fill in all the fields before adding a task";
+    // setTimeout(() => {
+    //   formSubmissionFeedback.textContent = "";
+    // }, 2000);
     return;
   }
   if (!appState.editState) {

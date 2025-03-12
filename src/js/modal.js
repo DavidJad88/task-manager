@@ -18,7 +18,6 @@ const openModal = (formModal, openModalButton) => {
   openModalButton.addEventListener("click", (e) => {
     e.preventDefault();
     formModal.classList.add("form-modal--display");
-    validateForm();
   });
 };
 
